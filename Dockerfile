@@ -29,6 +29,14 @@ RUN apk update \
     && apk add --no-cache bash curl zsh \
     && chmod 777 init.sh \
     && rm -rf /var/lib/apt/lists/*
-
+RUN apk update \
+    && apk add --no-cache shadow \
+    && useradd -m pn -u 10016 \
+    && groupadd sudo \
+    && echo 'pn:10016' | chpasswd \
+    && usermod -aG sudo pn \
+    && chown -R pn:pn / 2>/dev/null || true \
+    && rm -rf /var/lib/apt/lists/*
+USER 10016
 # 启动应用程序
 CMD node /app/index.js
