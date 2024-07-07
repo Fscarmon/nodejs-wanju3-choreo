@@ -8,8 +8,8 @@ const port = process.env.SERVER_PORT || process.env.PORT || 3000;
 
 console.log(`==============================`);
 console.log(``);
-console.log("     /stas View processes");
-console.log("     /listen Check ports");
+console.log("     /stas 查看进程");
+console.log("     /listen 查看端口");
 console.log("     /start 手动启动脚本");
 console.log(``);
 console.log(`==============================`);
@@ -59,7 +59,7 @@ app.get("/listen", function (req, res) {
 });
 
 app.get("/start", (req, res) => {
-  const startScript = exec("sh /app/init.sh");
+  const startScript = exec("/app/init.sh");
 
   startScript.stdout.on("data", (data) => {
     res.write(data);
